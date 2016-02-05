@@ -38,6 +38,21 @@ Then in a namespace of your choice add ``(: require [twig.core :as logger)`` whi
                    :debug)
 ```
 
+There are, of course, other things you can do:
+
+```clj
+(require [clojure.tools.logging :as log])
+
+(log/debug "Logging agent:" log/*logging-agent*)
+(log/debug "Logging factory:" (logger/get-factory))
+(log/debug "Logging factory name:" (logger/get-factory-name))
+(log/debug "Logger:" (logger/get-logger *ns*))
+(log/debug "Logger name:" (logger/get-logger-name *ns*))
+(log/debug "Logger level:" (logger/get-logger-level *ns*))
+(log/debug "Logger context:" (logger/get-logger-context *ns*))
+(log/debug "Logger configurator:" (logger/get-config *ns*))
+```
+
 ## License
 
 Copyright © 2015-2016, Duncan McGreggor
