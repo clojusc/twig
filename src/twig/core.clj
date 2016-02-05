@@ -28,16 +28,15 @@
     (.setContext cfg (get-logger-context namespace))
     cfg))
 
-(defn convert-level [level]
-  (match [level]
-    [:off] Level/OFF
-    ;;[:fatal] Level/FATAL
-    [:error] Level/ERROR
-    [:warn] Level/WARN
-    [:info] Level/INFO
-    [:debug] Level/DEBUG
-    [:trace] Level/TRACE
-    [:all] Level/ALL))
+(def convert-level
+  {:off Level/OFF
+   ;:fatal Level/FATAL
+   :error Level/ERROR
+   :warn Level/WARN
+   :info Level/INFO
+   :debug Level/DEBUG
+   :trace Level/TRACE
+   :all Level/ALL})
 
 (defmulti set-level! (fn [namesp level] (mapv class [namesp level])))
 
