@@ -34,7 +34,7 @@ Then in a namespace of your choice:
 
 ```clj
 (ns ...
-  (: require [twig.core :as logger)
+  (:require [twig.core :as logger])
   ...)
   ```
   
