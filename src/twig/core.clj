@@ -28,7 +28,7 @@
     (.setContext cfg (get-logger-context namespace))
     cfg))
 
-(def convert-level
+(def ->level
   {:off Level/OFF
    ;:fatal Level/FATAL
    :error Level/ERROR
@@ -47,3 +47,7 @@
 (defmethod set-level! [clojure.lang.PersistentVector clojure.lang.Keyword]
                       [namesps level]
   (dorun (map #(set-level! % level) namesps)))
+
+;; Aliases
+
+(def convert-level #'->level)
