@@ -1,7 +1,5 @@
 (ns twig.core
-  (:require [clojure.tools.logging :as log]
-            [clojure.tools.logging.impl :as log-impl]
-            [clojure.core.match :refer [match]])
+  (:require [clojure.tools.logging.impl :as log-impl])
   (:import [ch.qos.logback.classic Level]
            [ch.qos.logback.classic.joran JoranConfigurator]))
 
