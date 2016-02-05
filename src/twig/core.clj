@@ -26,21 +26,26 @@
     (.setContext cfg (get-logger-context namespace))
     cfg))
 
-(def ->level
-  {:off Level/OFF
-   ;:fatal Level/FATAL
-   :error Level/ERROR
-   :warn Level/WARN
-   :info Level/INFO
-   :debug Level/DEBUG
-   :trace Level/TRACE
-   :all Level/ALL})
+;; ->level
+
+(defmulti ->level class)
+
+(defmethod ->level clojure.lang.Symbol [level]
+  (Level/toLevel (str level)))
+
+(defmethod ->level clojure.lang.Keyword [level]
+  (Level/toLevel (name level)))
+
+(defmethod ->level java.lang.String [level]
+  (Level/toLevel level))
+
+;; set-level!
 
 (defmulti set-level! (fn [namesp level] (mapv class [namesp level])))
 
 (defmethod set-level! [clojure.lang.Symbol clojure.lang.Keyword]
                       [namesp level]
-  (.setLevel (get-logger namesp) (convert-level level)))
+  (.setLevel (get-logger namesp) (->level level)))
 
 (defmethod set-level! [clojure.lang.PersistentVector clojure.lang.Keyword]
                       [namesps level]

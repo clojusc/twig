@@ -3,7 +3,7 @@
             [twig.core :as twig])
   (:import [ch.qos.logback.classic Level]))
 
-(deftest ->level-test
+(deftest keyword->level-test
   (is (= (twig/->level :off) Level/OFF))
   (is (= (twig/->level :error) Level/ERROR))
   (is (= (twig/->level :warn) Level/WARN))
@@ -11,6 +11,24 @@
   (is (= (twig/->level :debug) Level/DEBUG))
   (is (= (twig/->level :trace) Level/TRACE))
   (is (= (twig/->level :all) Level/ALL)))
+
+(deftest symbol->level-test
+  (is (= (twig/->level 'off) Level/OFF))
+  (is (= (twig/->level 'error) Level/ERROR))
+  (is (= (twig/->level 'warn) Level/WARN))
+  (is (= (twig/->level 'info) Level/INFO))
+  (is (= (twig/->level 'debug) Level/DEBUG))
+  (is (= (twig/->level 'trace) Level/TRACE))
+  (is (= (twig/->level 'all) Level/ALL)))
+
+(deftest string->level-test
+  (is (= (twig/->level "off") Level/OFF))
+  (is (= (twig/->level "error") Level/ERROR))
+  (is (= (twig/->level "warn") Level/WARN))
+  (is (= (twig/->level "info") Level/INFO))
+  (is (= (twig/->level "debug") Level/DEBUG))
+  (is (= (twig/->level "trace") Level/TRACE))
+  (is (= (twig/->level "all") Level/ALL)))
 
 ;; This next test is kept to test backwards compatibility with the old API
 (deftest convert-level-test
