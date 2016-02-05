@@ -37,8 +37,8 @@ Then in a namespace of your choice:
   (:require [twig.core :as logger])
   ...)
   ```
-  
-  This will allow you do not only see nicely formatted log output (as configured in the included ``resources/logback.xml`` file), but also do things like setting the log level on a per-namespace basis:
+
+This will allow you to not only see nicely formatted log output (as configured in the included ``resources/logback.xml`` file), but also do things like setting the log level on a per-namespace basis:
 
 ```clj
 (logger/set-level! [com.datastax.driver
