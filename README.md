@@ -17,13 +17,26 @@
 
 ## Introduction
 
-TBD
+This is just a tiny bit of code, but it was starting to get duplicated around a bunch of projects, so now there's twig.
+
+It's got an XML file for configuring the formatter -- if anyone has figured out how to do this in code, I'd love a pointer or a PR ;-)
 
 
 ## Usage
 
-TBD
+Add to your ``project.clj``:
 
+```clj
+[twig "0.1.0-dev"]
+```
+
+Then in a namespace of your choice add ``(: require [twig.core :as logger)`` which will allow you do not only see nicely formatted log output (as configured in the included ``resources/logback.xml`` file), but also do things like setting the log level on a per-namespace basis:
+
+```clj
+(logger/set-level! [com.datastax.driver
+                    co.paralleluniverse]
+                   :debug)
+```
 
 ## License
 
