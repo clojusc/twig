@@ -10,6 +10,8 @@
   ;; add more dependencies that are chatty in the logs, we'll want to add them
   ;; here.
 
+  ; XXX put these examples into the README under "Usage"
+
   ; :logging-namespaces [lcmap-rest
   ;                      lcmap-client
   ;                      com.datastax.driver
