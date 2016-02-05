@@ -43,10 +43,14 @@ This will allow you to not only see nicely formatted log output (as configured i
 ```clj
 (logger/set-level! [com.datastax.driver
                     co.paralleluniverse]
-                   :debug)
+                   :info)
+(logger/set-level! my.project :debug)
 ```
 
-There are, of course, other things you can do:
+Note that the level can be any of the levels supported by ``ch.qos.logback.classic Level`` (see the [source code](https://github.com/qos-ch/logback/blob/master/logback-classic/src/main/java/ch/qos/logback/classic/Level.java)). As of now, those correspond to the following:
+``:off``, ``:error``, ``:warn``, ``:info``, ``:debug``, ``:trace``, and ``:all``. You may pass these as keywords, symbols, or strings.
+
+There are, of course, other things you can do besides setting the level:
 
 ```clj
 (require [clojure.tools.logging :as log])
@@ -60,6 +64,7 @@ There are, of course, other things you can do:
 (log/debug "Logger context:" (logger/get-logger-context *ns*))
 (log/debug "Logger configurator:" (logger/get-config *ns*))
 ```
+
 
 ## License
 
