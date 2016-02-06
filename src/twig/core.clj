@@ -49,7 +49,8 @@
 
 (defmethod set-level! [clojure.lang.PersistentVector clojure.lang.Keyword]
                       [namesps level]
-  (dorun (map #(set-level! % level) namesps)))
+  (doseq [ns namesps]
+    (set-level! ns level)))
 
 ;; Aliases
 
