@@ -26,18 +26,8 @@
     (.setContext cfg (get-logger-context namespace))
     cfg))
 
-;; ->level
-
-(defmulti ->level class)
-
-(defmethod ->level clojure.lang.Symbol [level]
-  (Level/toLevel (str level)))
-
-(defmethod ->level clojure.lang.Keyword [level]
+(defn ->level [level]
   (Level/toLevel (name level)))
-
-(defmethod ->level java.lang.String [level]
-  (Level/toLevel level))
 
 ;; set-level!
 
