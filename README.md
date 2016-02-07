@@ -27,7 +27,7 @@ It's got an XML file for configuring the formatter -- if anyone has figured out 
 Add to your ``project.clj``:
 
 ```clj
-[twig "0.1.0-dev"]
+[twig "0.1.1"]
 ```
 
 Then in a namespace of your choice:
