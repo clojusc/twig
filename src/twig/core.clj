@@ -1,5 +1,6 @@
 (ns twig.core
-  (:require [clojure.tools.logging.impl :as log-impl])
+  (:require [clojure.tools.logging.impl :as log-impl]
+            [clojure.pprint :as pp])
   (:import [ch.qos.logback.classic Level]
            [ch.qos.logback.classic.joran JoranConfigurator]))
 
@@ -41,6 +42,14 @@
                       [namesps level]
   (doseq [ns namesps]
     (set-level! ns level)))
+
+;; utilities
+
+(defn pprint
+  [& args]
+  (str "\n"
+       (with-out-str
+         (apply pp/pprint args))))
 
 ;; Aliases
 
