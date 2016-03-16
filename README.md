@@ -41,10 +41,10 @@ Then in a namespace of your choice:
 This will allow you to not only see nicely formatted log output (as configured in the included ``resources/logback.xml`` file), but also do things like setting the log level on a per-namespace basis:
 
 ```clj
-(logger/set-level! [com.datastax.driver
-                    co.paralleluniverse]
+(logger/set-level! '[com.datastax.driver
+                     co.paralleluniverse]
                    :info)
-(logger/set-level! my.project :debug)
+(logger/set-level! 'my.project :debug)
 ```
 
 Note that the level can be any of the levels supported by ``ch.qos.logback.classic Level`` (see the [source code](https://github.com/qos-ch/logback/blob/master/logback-classic/src/main/java/ch/qos/logback/classic/Level.java)). As of now, those correspond to the following:
