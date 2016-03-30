@@ -1,6 +1,6 @@
-(ns twig.core-test
+(ns clojusc.twig-test
   (:require [clojure.test :refer :all]
-            [twig.core :as twig])
+            [clojusc.twig :as twig])
   (:import [ch.qos.logback.classic Level]))
 
 (deftest keyword->level-test

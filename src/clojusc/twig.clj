@@ -1,4 +1,4 @@
-(ns twig.core
+(ns clojusc.twig
   (:require [clojure.tools.logging.impl :as log-impl]
             [clojure.pprint :as pp])
   (:import [ch.qos.logback.classic Level]
