@@ -17,9 +17,11 @@
 
 ## Introduction
 
-This is just a tiny bit of code, but it was starting to get duplicated around a bunch of projects, so now there's twig.
+This is just a tiny bit of code, but it was starting to get duplicated around a
+bunch of projects, so now there's twig.
 
-It's got an XML file for configuring the formatter -- if anyone has figured out how to do this in code, I'd love a pointer or a PR ;-)
+It's got an XML file for configuring the formatter -- if anyone has figured out
+how to do this in code, I'd love a pointer or a PR ;-)
 
 
 ## Usage
@@ -27,18 +29,20 @@ It's got an XML file for configuring the formatter -- if anyone has figured out 
 Add to your ``project.clj``:
 
 ```clj
-[twig "0.1.2"]
+[clojusc/twig "0.2.0"]
 ```
 
 Then in a namespace of your choice:
 
 ```clj
 (ns ...
-  (:require [twig.core :as logger])
+  (:require [clojusc.twig :as logger])
   ...)
   ```
 
-This will allow you to not only see nicely formatted log output (as configured in the included ``resources/logback.xml`` file), but also do things like setting the log level on a per-namespace basis:
+This will allow you to not only see nicely formatted log output (as configured
+in the included ``resources/logback.xml`` file), but also do things like
+setting the log level on a per-namespace basis:
 
 ```clj
 (logger/set-level! [com.datastax.driver
@@ -47,8 +51,12 @@ This will allow you to not only see nicely formatted log output (as configured i
 (logger/set-level! my.project :debug)
 ```
 
-Note that the level can be any of the levels supported by ``ch.qos.logback.classic Level`` (see the [source code](https://github.com/qos-ch/logback/blob/master/logback-classic/src/main/java/ch/qos/logback/classic/Level.java)). As of now, those correspond to the following:
-``:off``, ``:error``, ``:warn``, ``:info``, ``:debug``, ``:trace``, and ``:all``. You may pass these as keywords, symbols, or strings.
+Note that the level can be any of the levels supported by
+``ch.qos.logback.classic Level``
+(see the [source code](https://github.com/qos-ch/logback/blob/master/logback-classic/src/main/java/ch/qos/logback/classic/Level.java)).
+As of now, those correspond to the following:
+``:off``, ``:error``, ``:warn``, ``:info``, ``:debug``, ``:trace``, and
+``:all``. You may pass these as keywords, symbols, or strings.
 
 There are, of course, other things you can do besides setting the level:
 
