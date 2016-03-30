@@ -45,10 +45,10 @@ in the included ``resources/logback.xml`` file), but also do things like
 setting the log level on a per-namespace basis:
 
 ```clj
-(logger/set-level! [com.datastax.driver
-                    co.paralleluniverse]
+(logger/set-level! '[com.datastax.driver
+                     co.paralleluniverse]
                    :info)
-(logger/set-level! my.project :debug)
+(logger/set-level! 'my.project :debug)
 ```
 
 Note that the level can be any of the levels supported by
