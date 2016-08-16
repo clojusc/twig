@@ -1,11 +1,12 @@
 (ns clojusc.twig
-  (:require [clojure.tools.logging.impl :as log-impl]
+  (:require [clojure.tools.logging :as log]
+            [clojure.tools.logging.impl :as log-impl]
             [clojure.pprint :as pp])
   (:import [ch.qos.logback.classic Level]
            [ch.qos.logback.classic.joran JoranConfigurator]))
 
 (defn get-factory []
-  (log-impl/find-factory))
+  log/*logger-factory*)
 
 (defn get-factory-name []
   (log-impl/name (get-factory)))
