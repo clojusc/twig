@@ -1,6 +1,6 @@
 # twig [![Build Status][travis-badge]][travis][![Dependencies Status][deps-badge]][deps][![Clojars Project][clojars-badge]][clojars][![Tag][tag-badge]][tag][![Clojure version][clojure-v]](project.clj)
 
-[![][twig-logo]][twig-logo-large]
+[![][logo]][logo-large]
 
 *A little logging helper for Clojure projects*
 
@@ -26,7 +26,7 @@ how to do this in code, I'd love a pointer or a PR ;-)
 Add to your ``project.clj``:
 
 ```clj
-[clojusc/twig "0.2.0"]
+[clojusc/twig "0.2.4"]
 ```
 
 Then in a namespace of your choice:
