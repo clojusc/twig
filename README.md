@@ -1,9 +1,6 @@
-# twig
+# twig [![Build Status][travis-badge]][travis][![Dependencies Status][deps-badge]][deps][![Clojars Project][clojars-badge]][clojars][![Tag][tag-badge]][tag][![Clojure version][clojure-v]](project.clj)
 
 [![][twig-logo]][twig-logo-large]
-
-[twig-logo]: resources/images/twig-250x.png
-[twig-logo-large]: resources/images/twig-1000x.png
 
 *A little logging helper for Clojure projects*
 
@@ -80,3 +77,19 @@ Copyright © 2015-2016, Duncan McGreggor
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
+
+<!-- Named page links below: /-->
+
+[travis]: https://travis-ci.org/clojusc/twig
+[travis-badge]: https://travis-ci.org/clojusc/twig.png?branch=master
+[deps]: http://jarkeeper.com/clojusc/twig
+[deps-badge]: http://jarkeeper.com/clojusc/twig/status.svg
+[logo]: resources/images/twig-250x.png
+[logo-large]: resources/images/twig-1000x.png
+[tag-badge]: https://img.shields.io/github/tag/clojusc/twig.svg?maxAge=2592000
+[tag]: https://github.com/clojusc/twig/tags
+[clojure-v]: https://img.shields.io/badge/clojure-1.8.0-blue.svg
+[clojars]: https://clojars.org/clojusc/twig
+[clojars-badge]: https://img.shields.io/clojars/v/clojusc/twig.svg
+
+
