@@ -8,5 +8,6 @@
                  [org.slf4j/slf4j-api "1.7.21"]
                  [ch.qos.logback/logback-classic "1.1.7" :exclusions [
                    org.slf4j/slf4j-log4j12
+                   org.slf4j/slf4j-api
                    log4j/log4j]]
                  [janino "2.5.15"]])
