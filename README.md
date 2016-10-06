@@ -26,7 +26,7 @@ how to do this in code, I'd love a pointer or a PR ;-)
 Add to your ``project.clj``:
 
 ```clj
-[clojusc/twig "0.2.4"]
+[clojusc/twig "0.2.5"]
 ```
 
 Then in a namespace of your choice:
@@ -73,7 +73,9 @@ There are, of course, other things you can do besides setting the level:
 
 ## License
 
-Copyright © 2015-2016, Duncan McGreggor
+Copyright © 2015, Duncan McGreggor
+
+Copyright © 2016, Clojure-Aided Enrichment Center
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
