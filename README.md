@@ -74,6 +74,7 @@ There are, of course, other things you can do besides setting the level:
 ## License
 
 Copyright © 2015, Duncan McGreggor
+
 Copyright © 2016, Clojure-Aided Enrichment Center
 
 Distributed under the Eclipse Public License either version 1.0 or (at
