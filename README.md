@@ -26,7 +26,7 @@ how to do this in code, I'd love a pointer or a PR ;-)
 Add to your ``project.clj``:
 
 ```clj
-[clojusc/twig "0.2.5"]
+[clojusc/twig "0.2.6"]
 ```
 
 Then in a namespace of your choice:
