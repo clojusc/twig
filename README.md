@@ -1,4 +1,10 @@
-# twig [![Build Status][travis-badge]][travis][![Dependencies Status][deps-badge]][deps][![Clojars Project][clojars-badge]][clojars][![Tag][tag-badge]][tag][![Clojure version][clojure-v]](project.clj)
+# twig
+
+[![Build Status][travis-badge]][travis]
+[![Dependencies Status][deps-badge]][deps]
+[![Clojars Project][clojars-badge]][clojars]
+[![Tag][tag-badge]][tag]
+[![Clojure version][clojure-v]](project.clj)
 
 [![][logo]][logo-large]
 
@@ -8,11 +14,14 @@
 #### Table of Contents
 
 * [Introduction](#introduction-)
+* [Screenshots](#screenshots-)
+  * [Clojure](#clojure-)
+  * [Clojurescript](#clojurescript-)
 * [Usage](#usage-)
 * [License](#license-)
 
 
-## Introduction
+## Introduction [&#x219F;](#contents)
 
 This is just a tiny bit of code, but it was starting to get duplicated around a
 bunch of projects, so now there's twig.
@@ -21,7 +30,20 @@ It's got an XML file for configuring the formatter -- if anyone has figured out
 how to do this in code, I'd love a pointer or a PR ;-)
 
 
-## Usage
+## Screenshots [&#x219F;](#contents)
+
+
+### Clojure [&#x219F;](#contents)
+
+[![Clojure screenshot][clojure screenshot]][clojure screenshot]
+
+
+### Clojurescript [&#x219F;](#contents)
+
+[![Clojurescript screenshot][clojurescript screenshot]][clojurescript screenshot]
+
+
+## Usage [&#x219F;](#contents)
 
 Add to your ``project.clj``:
 
@@ -50,7 +72,7 @@ setting the log level on a per-namespace basis:
 
 Note that the level can be any of the levels supported by
 ``ch.qos.logback.classic Level``
-(see the [source code](https://github.com/qos-ch/logback/blob/master/logback-classic/src/main/java/ch/qos/logback/classic/Level.java)).
+(see the [source code][java log levels].
 As of now, those correspond to the following:
 ``:off``, ``:error``, ``:warn``, ``:info``, ``:debug``, ``:trace``, and
 ``:all``. You may pass these as keywords, symbols, or strings.
@@ -71,7 +93,7 @@ There are, of course, other things you can do besides setting the level:
 ```
 
 
-## License
+## License [&#x219F;](#contents)
 
 Copyright © 2015, Duncan McGreggor
 
@@ -81,6 +103,7 @@ Copyright © 2016, Element 84, Inc.
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
+
 
 <!-- Named page links below: /-->
 
@@ -95,5 +118,6 @@ your option) any later version.
 [clojure-v]: https://img.shields.io/badge/clojure-1.8.0-blue.svg
 [clojars]: https://clojars.org/clojusc/twig
 [clojars-badge]: https://img.shields.io/clojars/v/clojusc/twig.svg
-
-
+[java log levels]: https://github.com/qos-ch/logback/blob/master/logback-classic/src/main/java/ch/qos/logback/classic/Level.java
+[clojure screenshot]: resources/images/screenshot-clj.png
+[clojurescript screenshot]: resources/images/screenshot-cljs.png
