@@ -53,9 +53,9 @@
     (defn highlight-level [level]
       (let [level-upper (->level level)]
         (case level
-          :trace (.green color level-upper)
-          :debug (.bold color (.green color level-upper))
-          :info (.blue color level-upper)
+          :trace (.magenta color level-upper)
+          :debug (.blue color level-upper)
+          :info (.green color level-upper)
           :warn (.bold color (.yellow color level-upper))
           :error (.red color level-upper)
           :fatal (.bold color (.red color level-upper)))))
@@ -76,9 +76,9 @@
            (.cyan color (str (aget js/process "pid")))
            (.green color "]")
            " "
-           (.bold color (.green color "["))
+           (.green color "[")
            (highlight-level level)
-           (.bold color (.green color "]"))
+           (.green color "]")
            " "
            (.yellow color (str (or ?ns-str "?") ":" (or ?line "?")))
            " "
