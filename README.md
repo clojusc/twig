@@ -26,9 +26,6 @@
 This is just a tiny bit of code, but it was starting to get duplicated around a
 bunch of projects, so now there's twig.
 
-It's got an XML file for configuring the formatter -- if anyone has figured out
-how to do this in code, I'd love a pointer or a PR ;-)
-
 
 ## Screenshots [&#x219F;](#contents)
 
@@ -52,7 +49,7 @@ Output in a Node.js app written in Clojurescript:
 Add to your ``project.clj``:
 
 ```clj
-[clojusc/twig "0.2.6"]
+[clojusc/twig "0.3.0"]
 ```
 
 Then in a namespace of your choice:
