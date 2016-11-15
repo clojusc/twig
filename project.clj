@@ -1,4 +1,4 @@
-(defproject clojusc/twig "0.3.0-SNAPSHOT"
+(defproject clojusc/twig "0.3.0"
   :description "A little logging helper for Clojure projects"
   :url "https://github.com/clojusc/twig"
   :license {:name "Eclipse Public License"
@@ -11,7 +11,7 @@
                    org.slf4j/slf4j-log4j12
                    org.slf4j/slf4j-api
                    log4j/log4j]]
-                 [clojusc/cljs-tools "0.1.0-SNAPSHOT"]
+                 [clojusc/cljs-tools "0.1.0"]
                  [com.taoensso/timbre "4.7.4"]
                  [janino "2.5.15"]]
   :plugins
