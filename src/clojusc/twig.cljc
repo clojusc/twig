@@ -81,7 +81,7 @@
            (.green color "]")
            " "
            (.yellow color (str (or ?ns-str "?") ":" (or ?line "?")))
-           " "
+           " - "
            (.green color
              (str (force msg_)
                   (when-not no-stacktrace?
