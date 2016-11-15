@@ -86,7 +86,17 @@
              (str (force msg_)
                   (when-not no-stacktrace?
                     (when-let [err ?err]
-                      (str "\n" (log/stacktrace err opts))))))))))))
+                      (str "\n" (log/stacktrace err opts))))))))))
+    (defn ns->strs
+      ""
+      [namesp]
+      (let [namesp-str (str namesp)]
+        [namesp-str (str namesp-str ".*")]))
+
+    (defn nss->strs
+      ""
+      [namesps]
+      (flatten (map ns->strs namesps)))))
 
 ;; set-level!
 
@@ -98,7 +108,7 @@
   #?(:cljs
     (log/merge-config!
       {:level level
-       :ns-whitelist [namesp]})))
+       :ns-whitelist (ns->strs namesp)})))
 
 (defmethod set-level! [PersistentVector Keyword]
                       [namesps level]
@@ -108,7 +118,7 @@
   #?(:cljs
       (log/merge-config!
         {:level level
-         :ns-whitelist namesps
+         :ns-whitelist (nss->strs namesps)
          :output-fn log-formatter})))
 
 ;; utilities
