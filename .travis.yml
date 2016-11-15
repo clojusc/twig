@@ -1,1 +1,10 @@
 language: clojure
+script:
+  - make travis
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk7
+notifications:
+  email:
+      - oubiwann@gmail.com
