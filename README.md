@@ -35,10 +35,14 @@ how to do this in code, I'd love a pointer or a PR ;-)
 
 ### Clojure [&#x219F;](#contents)
 
+Usage in a Clojure REPL:
+
 [![Clojure screenshot][clojure screenshot]][clojure screenshot]
 
 
 ### Clojurescript [&#x219F;](#contents)
+
+Output in a Node.js app written in Clojurescript:
 
 [![Clojurescript screenshot][clojurescript screenshot]][clojurescript screenshot]
 
@@ -77,7 +81,11 @@ As of now, those correspond to the following:
 ``:off``, ``:error``, ``:warn``, ``:info``, ``:debug``, ``:trace``, and
 ``:all``. You may pass these as keywords, symbols, or strings.
 
-There are, of course, other things you can do besides setting the level:
+`:fatal` is also supported; in Clojure this is aliased to `:error`, but in
+Clojurescipt it is its own level.
+
+There are, of course, other things you can do besides setting the level. In
+Clojure (not Clojurescript), you can do the following:
 
 ```clj
 (require [clojure.tools.logging :as log])
