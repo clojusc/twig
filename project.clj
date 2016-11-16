@@ -3,17 +3,18 @@
   :url "https://github.com/clojusc/twig"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.293"]
-                 [org.clojure/tools.logging "0.3.1"]
-                 [org.slf4j/slf4j-api "1.7.21"]
-                 [ch.qos.logback/logback-classic "1.1.7" :exclusions [
+  :dependencies [[ch.qos.logback/logback-classic "1.1.7" :exclusions [
                    org.slf4j/slf4j-log4j12
                    org.slf4j/slf4j-api
                    log4j/log4j]]
+                 [clansi "1.0.0"]
                  [clojusc/cljs-tools "0.1.0"]
                  [com.taoensso/timbre "4.7.4"]
-                 [janino "2.5.15"]]
+                 [janino "2.5.15"]
+                 [org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojurescript "1.9.293"]
+                 [org.clojure/tools.logging "0.3.1"]
+                 [org.slf4j/slf4j-api "1.7.21"]]
   :plugins
     [[lein-cljsbuild "1.1.4"]
      [lein-npm "0.6.2"]]

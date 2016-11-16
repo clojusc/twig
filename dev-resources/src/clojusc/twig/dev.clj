@@ -3,7 +3,10 @@
             [clojure.reflect :refer [reflect]]
             [clojure.string :as string]
             [clojure.tools.logging :as log]
-            [clojusc.twig :as logger :refer [demo]]))
+            [clojusc.twig :as twig :refer [demo]]
+            [taoensso.timbre :as timbre]))
+
+(twig/set-level! '[clojusc] :trace)
 
 (defn show-methods
   ""

@@ -2,9 +2,11 @@
   (:require [clojure.string :as string]
             [clojusc.cljs-tools :as tools]
             #?@(:clj [
+              [clansi :as ansi]
               [clojure.pprint :as pp]
               [clojure.tools.logging :as log]
-              [clojure.tools.logging.impl :as log-impl]])
+              [clojure.tools.logging.impl :as log-impl]
+              [taoensso.timbre :as timbre]])
             #?@(:cljs [
               [cljs.nodejs :as nodejs]
               [cljs.pprint :as pp]
@@ -16,6 +18,9 @@
 
 #?(:cljs
   (defonce color (nodejs/require "colors")))
+
+(defn ->level [level]
+  (string/upper-case (name level)))
 
 #?(:clj
   (do
@@ -42,13 +47,47 @@
         (.setContext cfg (get-logger-context namespace))
         cfg))
 
-    (defn ->level [level]
-      (Level/toLevel (name level)))))
+    (defn java->level [level]
+      (Level/toLevel (name level)))
+
+    (defn highlight-level [level]
+      (let [level-upper (->level level)]
+        (case level
+          :trace (ansi/style level-upper :magenta)
+          :debug (ansi/style level-upper :blue)
+          :info (ansi/style level-upper :green)
+          :warn (ansi/style level-upper :yellow :bright)
+          :error (ansi/style level-upper :red)
+          :fatal (ansi/style level-upper :red :bright))))
+
+    (defn log-formatter
+      "Custom log output function.
+      Use`(partial log-formatter <opts-map>)` to modify default opts."
+      ([data]
+        (log-formatter nil data))
+      ([opts data] ; For partials
+       (let [{:keys [no-stacktrace? stacktrace-fonts]} opts
+             {:keys [level ?err #_vargs msg_ ?ns-str hostname_
+                     timestamp_ ?line]} data]
+         (str
+           (ansi/style (tools/now-iso) :green)
+           " "
+           (ansi/style "[" :green)
+           (ansi/style (.getName (Thread/currentThread)) :cyan)
+           (ansi/style "]" :green)
+           " "
+           (highlight-level level)
+           " "
+           (ansi/style (str (or ?ns-str "?") ":" (or ?line "?")) :yellow)
+           " - "
+           (ansi/style
+             (str (force msg_)
+                  (when-not no-stacktrace?
+                    (when-let [err ?err]
+                      (str "\n" (timbre/stacktrace err opts))))) :green)))))))
 
 #?(:cljs
   (do
-    (defn ->level [level]
-      (string/upper-case (name level)))
 
     (defn highlight-level [level]
       (let [level-upper (->level level)]
@@ -76,9 +115,7 @@
            (.cyan color (str (aget js/process "pid")))
            (.green color "]")
            " "
-           (.green color "[")
            (highlight-level level)
-           (.green color "]")
            " "
            (.yellow color (str (or ?ns-str "?") ":" (or ?line "?")))
            " - "
@@ -86,17 +123,18 @@
              (str (force msg_)
                   (when-not no-stacktrace?
                     (when-let [err ?err]
-                      (str "\n" (log/stacktrace err opts))))))))))
-    (defn ns->strs
-      ""
-      [namesp]
-      (let [namesp-str (str namesp)]
-        [namesp-str (str namesp-str ".*")]))
+                      (str "\n" (log/stacktrace err opts))))))))))))
 
-    (defn nss->strs
-      ""
-      [namesps]
-      (flatten (map ns->strs namesps)))))
+(defn ns->strs
+  ""
+  [namesp]
+  (let [namesp-str (str namesp)]
+    [namesp-str (str namesp-str ".*")]))
+
+(defn nss->strs
+  ""
+  [namesps]
+  (flatten (map ns->strs namesps)))
 
 ;; set-level!
 
@@ -104,17 +142,29 @@
 
 (defmethod set-level! [Symbol Keyword]
                       [namesp level]
-  #?(:clj (.setLevel (get-logger namesp) (->level level)))
+  #?(:clj
+    (do
+      (.setLevel (get-logger namesp) (java->level level))
+      (timbre/merge-config!
+        {:level level
+         :ns-whitelist (ns->strs namesp)
+         :output-fn log-formatter})))
   #?(:cljs
     (log/merge-config!
       {:level level
-       :ns-whitelist (ns->strs namesp)})))
+       :ns-whitelist (ns->strs namesp)
+       :output-fn log-formatter})))
 
 (defmethod set-level! [PersistentVector Keyword]
                       [namesps level]
   #?(:clj
-      (doseq [ns namesps]
-        (set-level! ns level)))
+      (do
+        (doseq [ns namesps]
+          (set-level! ns level))
+        (timbre/merge-config!
+          {:level level
+           :ns-whitelist (nss->strs namesps)
+           :output-fn log-formatter})))
   #?(:cljs
       (log/merge-config!
         {:level level
@@ -137,6 +187,29 @@
     (log/warn msg)
     (log/error msg)))
 
+(defn tdemo []
+  (let [msg "Hej! This is a message ..."]
+    (timbre/trace msg)
+    (timbre/debug msg)
+    (timbre/info msg)
+    (timbre/warn msg)
+    (timbre/error msg)
+    (timbre/fatal msg)))
+
 ;; Aliases
 
-(def convert-level #'->level)
+(def convert-level #'java->level)
+
+(def trace #'log/trace)
+(def debug #'log/debug)
+(def info #'log/info)
+(def warn #'log/warn)
+(def error #'log/error)
+(def fatal #'log/fatal)
+
+(def tracef #'log/tracef)
+(def debugf #'log/debugf)
+(def infof #'log/infof)
+(def warnf #'log/warnf)
+(def errorf #'log/errorf)
+(def fatalf #'log/fatalf)
