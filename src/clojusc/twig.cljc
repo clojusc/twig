@@ -6,15 +6,17 @@
               [clojure.pprint :as pp]
               [clojure.tools.logging :as log]
               [clojure.tools.logging.impl :as log-impl]
-              [taoensso.timbre :as timbre]])
+              [taoensso.timbre :as timbre :refer [log!]]])
             #?@(:cljs [
               [cljs.nodejs :as nodejs]
               [cljs.pprint :as pp]
-              [taoensso.timbre :as log]]))
+              [taoensso.timbre :as timbre :refer-macros [log!]]]))
   #?(:clj
     (:import [ch.qos.logback.classic Level]
              [ch.qos.logback.classic.joran JoranConfigurator]
-             [clojure.lang Keyword PersistentVector Symbol])))
+             [clojure.lang Keyword PersistentVector Symbol]))
+  #?(:cljs
+    (:require-macros [clojusc.twig :as twig-macros :refer ()])))
 
 #?(:cljs
   (defonce color (nodejs/require "colors")))
@@ -49,6 +51,8 @@
 
     (defn java->level [level]
       (Level/toLevel (name level)))
+
+    (def convert-level #'java->level)
 
     (defn highlight-level [level]
       (let [level-upper (->level level)]
@@ -88,7 +92,6 @@
 
 #?(:cljs
   (do
-
     (defn highlight-level [level]
       (let [level-upper (->level level)]
         (case level
@@ -123,7 +126,7 @@
              (str (force msg_)
                   (when-not no-stacktrace?
                     (when-let [err ?err]
-                      (str "\n" (log/stacktrace err opts))))))))))))
+                      (str "\n" (timbre/stacktrace err opts))))))))))))
 
 (defn ns->strs
   ""
@@ -150,7 +153,7 @@
          :ns-whitelist (ns->strs namesp)
          :output-fn log-formatter})))
   #?(:cljs
-    (log/merge-config!
+    (timbre/merge-config!
       {:level level
        :ns-whitelist (ns->strs namesp)
        :output-fn log-formatter})))
@@ -166,7 +169,7 @@
            :ns-whitelist (nss->strs namesps)
            :output-fn log-formatter})))
   #?(:cljs
-      (log/merge-config!
+      (timbre/merge-config!
         {:level level
          :ns-whitelist (nss->strs namesps)
          :output-fn log-formatter})))
@@ -181,35 +184,9 @@
 
 (defn demo []
   (let [msg "Hej! This is a message ..."]
-    (log/trace msg)
-    (log/debug msg)
-    (log/info msg)
-    (log/warn msg)
-    (log/error msg)))
-
-(defn tdemo []
-  (let [msg "Hej! This is a message ..."]
     (timbre/trace msg)
     (timbre/debug msg)
     (timbre/info msg)
     (timbre/warn msg)
     (timbre/error msg)
     (timbre/fatal msg)))
-
-;; Aliases
-
-(def convert-level #'java->level)
-
-(def trace #'log/trace)
-(def debug #'log/debug)
-(def info #'log/info)
-(def warn #'log/warn)
-(def error #'log/error)
-(def fatal #'log/fatal)
-
-(def tracef #'log/tracef)
-(def debugf #'log/debugf)
-(def infof #'log/infof)
-(def warnf #'log/warnf)
-(def errorf #'log/errorf)
-(def fatalf #'log/fatalf)
