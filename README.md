@@ -118,7 +118,7 @@ your option) any later version.
 [deps-badge]: http://jarkeeper.com/clojusc/twig/status.svg
 [logo]: resources/images/twig-250x.png
 [logo-large]: resources/images/twig-1000x.png
-[tag-badge]: https://img.shields.io/github/tag/clojusc/twig.svg?maxAge=2592000
+[tag-badge]: https://img.shields.io/github/tag/clojusc/twig.svg
 [tag]: https://github.com/clojusc/twig/tags
 [clojure-v]: https://img.shields.io/badge/clojure-1.8.0-blue.svg
 [clojars]: https://clojars.org/clojusc/twig
