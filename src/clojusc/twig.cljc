@@ -22,6 +22,43 @@
 (defn ->level [level]
   (string/upper-case (name level)))
 
+(defn get-process-or-thread
+  []
+  #?(:clj (.getName (Thread/currentThread)))
+  #?(:cljs (str (aget js/process "pid"))))
+
+(defn blue [text]
+  #?(:clj (ansi/style text :blue))
+  #?(:cljs (.blue color text)))
+
+(defn cyan [text]
+  #?(:clj (ansi/style text :cyan))
+  #?(:cljs (.cyan color text)))
+
+(defn green [text]
+  #?(:clj (ansi/style text :green))
+  #?(:cljs (.green color text)))
+
+(defn magenta [text]
+  #?(:clj (ansi/style text :magenta))
+  #?(:cljs (.magenta color text)))
+
+(defn red [text]
+  #?(:clj (ansi/style text :red))
+  #?(:cljs (.red color text)))
+
+(defn bright-red [text]
+  #?(:clj (ansi/style text :red :bright))
+  #?(:cljs (.bold color (.red color text))))
+
+(defn yellow [text]
+  #?(:clj (ansi/style text :yellow))
+  #?(:cljs (.yellow color text)))
+
+(defn bright-yellow [text]
+  #?(:clj (ansi/style text :yellow :bright))
+  #?(:cljs (.bold color (.yellow color text))))
+
 #?(:clj
   (do
     (defn get-factory []
@@ -52,79 +89,45 @@
 
     (def convert-level #'java->level)
 
-    (defn highlight-level [level]
-      (let [level-upper (->level level)]
-        (case level
-          :trace (ansi/style level-upper :magenta)
-          :debug (ansi/style level-upper :blue)
-          :info (ansi/style level-upper :green)
-          :warn (ansi/style level-upper :yellow :bright)
-          :error (ansi/style level-upper :red)
-          :fatal (ansi/style level-upper :red :bright))))
 
-    (defn log-formatter
-      "Custom log output function.
-      Use`(partial log-formatter <opts-map>)` to modify default opts."
-      ([data]
-        (log-formatter nil data))
-      ([opts data] ; For partials
-       (let [{:keys [no-stacktrace? stacktrace-fonts]} opts
-             {:keys [level ?err #_vargs msg_ ?ns-str hostname_
-                     timestamp_ ?line]} data]
-         (str
-           (ansi/style (tools/now-iso) :green)
-           " "
-           (ansi/style "[" :green)
-           (ansi/style (.getName (Thread/currentThread)) :cyan)
-           (ansi/style "]" :green)
-           " "
-           (highlight-level level)
-           " "
-           (ansi/style (str (or ?ns-str "?") ":" (or ?line "?")) :yellow)
-           " - "
-           (ansi/style
-             (str (force msg_)
-                  (when-not no-stacktrace?
-                    (when-let [err ?err]
-                      (str "\n" (timbre/stacktrace err opts))))) :green)))))))
+    ))
 
-#?(:cljs
-  (do
-    (defn highlight-level [level]
-      (let [level-upper (->level level)]
-        (case level
-          :trace (.magenta color level-upper)
-          :debug (.blue color level-upper)
-          :info (.green color level-upper)
-          :warn (.bold color (.yellow color level-upper))
-          :error (.red color level-upper)
-          :fatal (.bold color (.red color level-upper)))))
+(defn highlight-level [level]
+  (let [level-upper (->level level)]
+    (case level
+      :trace (magenta level-upper)
+      :debug (blue level-upper)
+      :info (green level-upper)
+      :warn (bright-yellow level-upper)
+      :error (red level-upper)
+      :fatal (bright-red level-upper))))
 
-    (defn log-formatter
-      "Custom log output function.
-      Use`(partial log-formatter <opts-map>)` to modify default opts."
-      ([data]
-        (log-formatter nil data))
-      ([opts data] ; For partials
-       (let [{:keys [no-stacktrace? stacktrace-fonts]} opts
-             {:keys [level ?err #_vargs msg_ ?ns-str hostname_
-                     timestamp_ ?line]} data]
-         (str
-           (.green color (tools/now-iso))
-           " "
-           (.green color "[pid:")
-           (.cyan color (str (aget js/process "pid")))
-           (.green color "]")
-           " "
-           (highlight-level level)
-           " "
-           (.yellow color (str (or ?ns-str "?") ":" (or ?line "?")))
-           " - "
-           (.green color
-             (str (force msg_)
-                  (when-not no-stacktrace?
-                    (when-let [err ?err]
-                      (str "\n" (timbre/stacktrace err opts))))))))))))
+(defn log-formatter
+  "Custom log output function.
+  Use`(partial log-formatter <opts-map>)` to modify default opts."
+  ([data]
+    (log-formatter nil data))
+  ([opts data] ; For partials
+   (let [{:keys [no-stacktrace? stacktrace-fonts]} opts
+         {:keys [level ?err #_vargs msg_ ?ns-str hostname_
+                 timestamp_ ?line]} data]
+     (str
+       (green (tools/now-iso))
+       " "
+       #?(:clj (green "["))
+       #?(:cljs (green "[pid:"))
+       (cyan (get-process-or-thread))
+       (green "]")
+       " "
+       (highlight-level level)
+       " "
+       (yellow (str (or ?ns-str "?") ":" (or ?line "?")))
+       " - "
+       (green
+         (str (force msg_)
+              (when-not no-stacktrace?
+                (when-let [err ?err]
+                  (str "\n" (timbre/stacktrace err opts))))))))))
 
 (defn ns->strs
   ""
