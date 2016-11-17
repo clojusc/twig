@@ -6,17 +6,15 @@
               [clojure.pprint :as pp]
               [clojure.tools.logging :as log]
               [clojure.tools.logging.impl :as log-impl]
-              [taoensso.timbre :as timbre :refer [log!]]])
+              [taoensso.timbre :as timbre]])
             #?@(:cljs [
               [cljs.nodejs :as nodejs]
               [cljs.pprint :as pp]
-              [taoensso.timbre :as timbre :refer-macros [log!]]]))
+              [taoensso.timbre :as timbre]]))
   #?(:clj
     (:import [ch.qos.logback.classic Level]
              [ch.qos.logback.classic.joran JoranConfigurator]
-             [clojure.lang Keyword PersistentVector Symbol]))
-  #?(:cljs
-    (:require-macros [clojusc.twig :as twig-macros :refer ()])))
+             [clojure.lang Keyword PersistentVector Symbol])))
 
 #?(:cljs
   (defonce color (nodejs/require "colors")))
