@@ -87,10 +87,7 @@
     (defn java->level [level]
       (Level/toLevel (name level)))
 
-    (def convert-level #'java->level)
-
-
-    ))
+    (def convert-level #'java->level)))
 
 (defn highlight-level [level]
   (let [level-upper (->level level)]
