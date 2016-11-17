@@ -181,6 +181,7 @@
          (apply pp/pprint args))))
 
 (defn demo []
+  (set-level! '[clojusc clojure user cljs.user] :trace)
   (let [msg "Hej! This is a message ..."]
     (timbre/trace msg)
     (timbre/debug msg)
