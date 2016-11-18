@@ -8,7 +8,7 @@
                    org.slf4j/slf4j-api
                    log4j/log4j]]
                  [clansi "1.0.0"]
-                 [clojusc/cljs-tools "0.1.1"]
+                 [clojusc/cljs-tools "0.1.2"]
                  [com.taoensso/timbre "4.7.4"]
                  [janino "2.5.15"]
                  [org.clojure/clojure "1.8.0"]
