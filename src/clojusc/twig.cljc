@@ -84,10 +84,10 @@
         (.setContext cfg (get-logger-context namespace))
         cfg))
 
-    (defn java->level [level]
+    (defn level->java [level]
       (Level/toLevel (name level)))
 
-    (def convert-level #'java->level)))
+    (def convert-level #'level->java)))
 
 (defn highlight-level [level]
   (let [level-upper (->level level)]
@@ -145,7 +145,7 @@
                       [namesp level]
   #?(:clj
     (do
-      (.setLevel (get-logger namesp) (java->level level))
+      (.setLevel (get-logger namesp) (level->java level))
       (timbre/merge-config!
         {:level level
          :ns-whitelist (ns->strs namesp)
