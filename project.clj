@@ -1,4 +1,4 @@
-(defproject clojusc/twig "0.3.1"
+(defproject clojusc/twig "0.3.2-SNAPSHOT"
   :description "A little logging helper for Clojure projects"
   :url "https://github.com/clojusc/twig"
   :license {:name "Eclipse Public License"
