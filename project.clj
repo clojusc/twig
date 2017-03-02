@@ -1,22 +1,22 @@
-(defproject clojusc/twig "0.3.1-SNAPSHOT"
+(defproject clojusc/twig "0.3.1"
   :description "A little logging helper for Clojure projects"
   :url "https://github.com/clojusc/twig"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[ch.qos.logback/logback-classic "1.1.7" :exclusions [
+  :dependencies [[ch.qos.logback/logback-classic "1.2.1" :exclusions [
                    org.slf4j/slf4j-log4j12
                    org.slf4j/slf4j-api
                    log4j/log4j]]
                  [clansi "1.0.0"]
                  [clojusc/cljs-tools "0.1.2"]
-                 [com.taoensso/timbre "4.7.4"]
+                 [com.taoensso/timbre "4.8.0"]
                  [janino "2.5.15"]
                  [org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.293"]
+                 [org.clojure/clojurescript "1.9.495"]
                  [org.clojure/tools.logging "0.3.1"]
-                 [org.slf4j/slf4j-api "1.7.21"]]
+                 [org.slf4j/slf4j-api "1.7.24"]]
   :plugins
-    [[lein-cljsbuild "1.1.4"]
+    [[lein-cljsbuild "1.1.5"]
      [lein-npm "0.6.2"]]
   :npm
     {:dependencies

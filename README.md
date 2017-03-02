@@ -49,7 +49,7 @@ Output in a Node.js app written in Clojurescript:
 Add to your ``project.clj``:
 
 ```clj
-[clojusc/twig "0.3.0"]
+[clojusc/twig "0.3.1"]
 ```
 
 Then in a namespace of your choice:
@@ -102,7 +102,7 @@ Clojure (not Clojurescript), you can do the following:
 
 Copyright © 2015, Duncan McGreggor
 
-Copyright © 2016, Clojure-Aided Enrichment Center
+Copyright © 2016-2017, Clojure-Aided Enrichment Center
 
 Copyright © 2016, Element 84, Inc.
 
