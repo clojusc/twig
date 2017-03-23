@@ -99,11 +99,11 @@
       :error (red level-upper)
       :fatal (bright-red level-upper))))
 
-(defn log-formatter
+(defn color-log-formatter
   "Custom log output function.
-  Use`(partial log-formatter <opts-map>)` to modify default opts."
+  Use `(partial log-formatter <opts-map>)` to modify default opts."
   ([data]
-    (log-formatter nil data))
+    (color-log-formatter nil data))
   ([opts data] ; For partials
    (let [{:keys [no-stacktrace? stacktrace-fonts]} opts
          {:keys [level ?err #_vargs msg_ ?ns-str hostname_
@@ -126,6 +126,31 @@
                 (when-let [err ?err]
                   (str "\n" (timbre/stacktrace err opts))))))))))
 
+(defn no-color-log-formatter
+  "Custom log output function without ANSI colors.
+  Use `(partial log-formatter <opts-map>)` to modify default opts."
+  ([data]
+    (no-color-log-formatter nil data))
+  ([opts data] ; For partials
+   (let [{:keys [no-stacktrace? stacktrace-fonts]} opts
+         {:keys [level ?err #_vargs msg_ ?ns-str hostname_
+                 timestamp_ ?line]} data]
+     (str
+       (tools/now-iso)
+       " "
+       #?(:clj "[")
+       #?(:cljs "[pid:")
+       (get-process-or-thread)
+       "] "
+       (->level level)
+       " "
+       (str (or ?ns-str "?") ":" (or ?line "?"))
+       " - "
+       (str (force msg_)
+          (when-not no-stacktrace?
+            (when-let [err ?err]
+              (str "\n" (timbre/stacktrace err opts)))))))))
+
 (defn ns->strs
   ""
   [namesp]
@@ -139,10 +164,11 @@
 
 ;; set-level!
 
-(defmulti set-level! (fn [namesp level] (mapv type [namesp level])))
+(defmulti set-level! (fn [namesp level & args]
+                       (mapv class (into [namesp level] args))))
 
-(defmethod set-level! [Symbol Keyword]
-                      [namesp level]
+(defmethod set-level! [Symbol Keyword clojure.lang.IFn]
+  [namesp level log-formatter]
   #?(:clj
     (do
       (.setLevel (get-logger namesp) (level->java level))
@@ -156,12 +182,12 @@
        :ns-whitelist (ns->strs namesp)
        :output-fn log-formatter})))
 
-(defmethod set-level! [PersistentVector Keyword]
-                      [namesps level]
+(defmethod set-level! [PersistentVector Keyword clojure.lang.IFn]
+  [namesps level log-formatter]
   #?(:clj
       (do
         (doseq [ns namesps]
-          (set-level! ns level))
+          (set-level! ns level log-formatter))
         (timbre/merge-config!
           {:level level
            :ns-whitelist (nss->strs namesps)
@@ -172,6 +198,10 @@
          :ns-whitelist (nss->strs namesps)
          :output-fn log-formatter})))
 
+(defmethod set-level! [Object Keyword]
+  [ns-or-nss level]
+  (set-level! ns-or-nss level color-log-formatter))
+
 ;; utilities
 
 (defn pprint
@@ -180,8 +210,9 @@
        (with-out-str
          (apply pp/pprint args))))
 
-(defn demo []
-  (set-level! '[clojusc clojure user cljs.user] :trace)
+(defn demo
+  [log-formatter]
+  (set-level! '[clojusc clojure user cljs.user] :trace log-formatter)
   (let [msg "Hej! This is a message ..."]
     (timbre/trace msg)
     (timbre/debug msg)
@@ -189,3 +220,11 @@
     (timbre/warn msg)
     (timbre/error msg)
     (timbre/fatal msg)))
+
+(defn color-demo
+  []
+  (demo color-log-formatter))
+
+(defn no-color-demo
+  []
+  (demo no-color-log-formatter))

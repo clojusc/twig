@@ -8,6 +8,9 @@
 
 (twig/set-level! '[clojusc] :trace)
 
+(defn no-color []
+  (twig/set-level! '[clojusc] :trace twig/no-color-log-formatter))
+
 (defn show-methods
   ""
   [obj]
