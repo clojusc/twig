@@ -48,6 +48,8 @@
        "dev-resources/scripts/browser-repl.clj"]
      }
   :profiles {
+    :uberjar {
+      :aot :all}
     :dev {
       :source-paths ["dev-resources/src"]
       :repl-options {
