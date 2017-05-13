@@ -11,6 +11,7 @@
                  [clojusc/cljs-tools "0.2.0-SNAPSHOT"]
                  [com.taoensso/timbre "4.10.0"]
                  [janino "2.5.15"]
+                 [org.clojure/clojurescript "1.9.542"]
                  [org.clojure/tools.logging "0.3.1"]
                  [org.slf4j/slf4j-api "1.7.24"]]
   :plugins
