@@ -3,7 +3,7 @@
   :url "https://github.com/clojusc/twig"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[ch.qos.logback/logback-classic "1.2.1" :exclusions [
+  :dependencies [[ch.qos.logback/logback-classic "1.2.3" :exclusions [
                    org.slf4j/slf4j-log4j12
                    org.slf4j/slf4j-api
                    log4j/log4j]]
@@ -13,7 +13,7 @@
                  [janino "2.5.15"]
                  [org.clojure/clojurescript "1.9.542"]
                  [org.clojure/tools.logging "0.3.1"]
-                 [org.slf4j/slf4j-api "1.7.24"]]
+                 [org.slf4j/slf4j-api "1.7.25"]]
   :plugins
     [[lein-cljsbuild "1.1.6" :exclusions [org.clojure/clojure]]
      [lein-npm "0.6.2" :exclusions [org.clojure/clojure]]]
@@ -56,4 +56,12 @@
         :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
       :dependencies
           [[com.cemerick/piggieback "0.2.1"]
-           [org.clojure/tools.nrepl "0.2.12"]]}})
+           [org.clojure/tools.nrepl "0.2.13"]]}
+    :test {
+      :plugins [
+        [lein-ancient "0.6.10"]
+        [jonase/eastwood "0.2.3" :exclusions [org.clojure/clojure]]
+        [lein-bikeshed "0.4.1" :exclusions [org.clojure/tools.namespace]]
+        [lein-kibit "0.1.3" :exclusions [org.clojure/clojure]]
+        [venantius/yagni "0.1.4"]]}})
+
