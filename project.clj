@@ -3,23 +3,23 @@
   :url "https://github.com/clojusc/twig"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[ch.qos.logback/logback-classic "1.2.3" :exclusions [
-                   org.slf4j/slf4j-log4j12
-                   org.slf4j/slf4j-api
-                   log4j/log4j]]
-                 [clansi "1.0.0"]
-                 [clojusc/cljs-tools "0.2.0-SNAPSHOT"]
-                 [com.taoensso/timbre "4.10.0"]
-                 [janino "2.5.15"]
-                 [org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.542"]
-                 [org.clojure/tools.logging "0.3.1"]
-                 [org.slf4j/slf4j-api "1.7.25"]]
-  :plugins
-    [[lein-cljsbuild "1.1.6" :exclusions [org.clojure/clojure]]
-     [lein-npm "0.6.2" :exclusions [org.clojure/clojure]]]
-  :npm
-    {:dependencies
+  :dependencies [
+    [ch.qos.logback/logback-classic "1.2.3" :exclusions [
+      org.slf4j/slf4j-log4j12
+      org.slf4j/slf4j-api
+      log4j/log4j]]
+    [clansi "1.0.0"]
+    [clojusc/cljs-tools "0.2.0-SNAPSHOT"]
+    [com.taoensso/timbre "4.10.0"]
+    [org.clojure/clojure "1.8.0"]
+    [org.clojure/clojurescript "1.9.542"]
+    [org.clojure/tools.logging "0.3.1"]
+    [org.slf4j/slf4j-api "1.7.25"]]
+  :plugins [
+    [lein-cljsbuild "1.1.6" :exclusions [org.clojure/clojure]]
+    [lein-npm "0.6.2" :exclusions [org.clojure/clojure]]]
+  :npm {
+    :dependencies [
       [[colors "1.1.2"]]}
   :cljsbuild {
     :builds [
