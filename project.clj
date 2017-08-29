@@ -16,7 +16,7 @@
     [org.clojure/tools.logging "0.4.0"]
     [org.slf4j/slf4j-api "1.7.25"]]
   :plugins [
-    [lein-cljsbuild "1.1.6" :exclusions [org.clojure/clojure]]
+    [lein-cljsbuild "1.1.7" :exclusions [org.clojure/clojure]]
     [lein-npm "0.6.2" :exclusions [org.clojure/clojure]]]
   :npm {
     :dependencies [
