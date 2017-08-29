@@ -9,6 +9,9 @@ deps:
 jar:
 	lein jar
 
+uberjar:
+	lein uberjar
+
 cljs:
 	lein cljsbuild once twig
 
@@ -19,4 +22,4 @@ clean:
 	lein clean
 	rm -rf .repl-* pom.xml*
 
-travis: clean clj jar node cljs check
+travis: clean clj uberjar node cljs check
