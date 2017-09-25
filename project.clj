@@ -16,7 +16,7 @@
     [org.clojure/tools.logging "0.4.0"]
     [org.slf4j/slf4j-api "1.7.25"]]
   :plugins [
-    [lein-cljsbuild "1.1.6" :exclusions [org.clojure/clojure]]
+    [lein-cljsbuild "1.1.7" :exclusions [org.clojure/clojure]]
     [lein-npm "0.6.2" :exclusions [org.clojure/clojure]]]
   :npm {
     :dependencies [
@@ -46,7 +46,7 @@
         [org.clojure/tools.namespace "0.2.11"]]
       :plugins [
         [jonase/eastwood "0.2.4"]
-        [lein-ancient "0.6.10"]
+        [lein-ancient "0.6.12"]
         [lein-bikeshed "0.4.1"]
         [lein-kibit "0.1.5"]
         [lein-shell "0.5.0"]
@@ -65,7 +65,7 @@
       ["trampoline" "run" "-m" "clojure.main"
        "dev-resources/scripts/browser-repl.clj"]
     "check-deps" [
-      "with-profile" "+test" "ancient" "check" "all"]
+      "with-profile" "+test" "ancient" "check" ":all"]
     "kibit" [
       "with-profile" "+test" "do"
         ["shell" "echo" "== Kibit =="]
