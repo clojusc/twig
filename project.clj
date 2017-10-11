@@ -31,6 +31,26 @@
          {:target :nodejs
           :output-to "target/node/twig.js"
           :output-dir "target/node"}}]}
+  :profiles {
+    :ubercompile {
+      :aot :all}
+    :dev {
+      :source-paths ["dev-resources/src"]
+      :repl-options {
+        :init-ns clojusc.twig.dev}
+      :dependencies [
+           [org.clojure/tools.nrepl "0.2.13"]]}
+    :test {
+      :exclusions [org.clojure/clojure]
+      :dependencies [
+        [org.clojure/tools.namespace "0.2.11"]]
+      :plugins [
+        [jonase/eastwood "0.2.4"]
+        [lein-ancient "0.6.12"]
+        [lein-bikeshed "0.4.1"]
+        [lein-kibit "0.1.5"]
+        [lein-shell "0.5.0"]
+        [venantius/yagni "0.1.4"]]}}
   :aliases {
     "rhino-repl"
       ^{:doc "Start a Rhino-based Clojurescript REPL"}
@@ -44,23 +64,18 @@
       ^{:doc "Start a browser-based Clojurescript REPL"}
       ["trampoline" "run" "-m" "clojure.main"
        "dev-resources/scripts/browser-repl.clj"]
-    "check-deps"
-      ^{:doc "Check for all old dependencies."}
-      ["with-profile" "+test" "ancient" "check" ":all"]
+    "check-deps" [
+      "with-profile" "+test" "ancient" "check" ":all"]
+    "kibit" [
+      "with-profile" "+test" "do"
+        ["shell" "echo" "== Kibit =="]
+        ["kibit"]]
+    "outlaw" [
+      "with-profile" "+test"
+      "eastwood" "{:namespaces [:source-paths] :source-paths [\"src\"]}"]
+    "lint" [
+      "with-profile" "+test" "do"
+        ["check"] ["kibit"] ["outlaw"]]
     "build"
       ^{:doc "Perform build steps."}
-      ["do" ["check"] ["compile"] ["with-profile" "+ubercompile" "compile"]]}
-  :profiles {
-    :ubercompile {
-      :aot :all}
-    :test {
-      :plugins [
-        [jonase/eastwood "0.2.4"]
-        [lein-kibit "0.1.5"]
-        [lein-ancient "0.6.12"]]}
-    :dev {
-      :source-paths ["dev-resources/src"]
-      :repl-options {
-        :init-ns clojusc.twig.dev}
-      :dependencies [
-        [org.clojure/tools.nrepl "0.2.13"]]}})
+      ["do" ["check"] ["compile"] ["with-profile" "+ubercompile" "compile"]]})
