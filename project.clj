@@ -46,7 +46,10 @@
        "dev-resources/scripts/browser-repl.clj"]
     "check-deps"
       ^{:doc "Check for all old dependencies."}
-      ["with-profile" "+test" "ancient" "check" ":all"]}
+      ["with-profile" "+test" "ancient" "check" ":all"]
+    "build"
+      ^{:doc "Perform build steps."}
+      ["do" ["check"] ["compile"] ["with-profile" "+ubercompile" "compile"]]}
   :profiles {
     :ubercompile {
       :aot :all}
