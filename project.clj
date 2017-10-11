@@ -1,4 +1,4 @@
-(defproject clojusc/twig "0.3.2-SNAPSHOT"
+(defproject clojusc/twig "0.3.2"
   :description "A little logging helper for Clojure projects"
   :url "https://github.com/clojusc/twig"
   :license {:name "Eclipse Public License"
@@ -7,7 +7,7 @@
   :dependencies [
     [ch.qos.logback/logback-classic "1.2.3"]
     [clansi "1.0.0"]
-    [clojusc/cljs-tools "0.2.0-SNAPSHOT"]
+    [clojusc/cljs-tools "0.2.0"]
     [com.taoensso/timbre "4.10.0"]
     [org.clojure/clojure "1.8.0"]
     [org.clojure/clojurescript "1.9.946"]
@@ -41,7 +41,6 @@
       :dependencies [
            [org.clojure/tools.nrepl "0.2.13"]]}
     :test {
-      :exclusions [org.clojure/clojure]
       :dependencies [
         [org.clojure/tools.namespace "0.2.11"]]
       :plugins [
@@ -78,4 +77,8 @@
         ["check"] ["kibit"] ["outlaw"]]
     "build"
       ^{:doc "Perform build steps."}
-      ["do" ["check"] ["compile"] ["with-profile" "+ubercompile" "compile"]]})
+      ["do" ["check"]
+            ["compile"]
+            ["with-profile" "+ubercompile" "compile"]
+            ["clean"]
+            ["uberjar"]]})
