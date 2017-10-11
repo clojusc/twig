@@ -1,18 +1,16 @@
-(defproject clojusc/twig "0.3.2-SNAPSHOT"
+(defproject clojusc/twig "0.3.2"
   :description "A little logging helper for Clojure projects"
   :url "https://github.com/clojusc/twig"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :exclusions [org.clojure/clojure]
   :dependencies [
-    [ch.qos.logback/logback-classic "1.2.3" :exclusions [
-      org.slf4j/slf4j-log4j12
-      org.slf4j/slf4j-api
-      log4j/log4j]]
+    [ch.qos.logback/logback-classic "1.2.3"]
     [clansi "1.0.0"]
-    [clojusc/cljs-tools "0.2.0-SNAPSHOT"]
+    [clojusc/cljs-tools "0.2.0"]
     [com.taoensso/timbre "4.10.0"]
     [org.clojure/clojure "1.8.0"]
-    [org.clojure/clojurescript "1.9.908"]
+    [org.clojure/clojurescript "1.9.946"]
     [org.clojure/tools.logging "0.4.0"]
     [org.slf4j/slf4j-api "1.7.25"]]
   :plugins [
@@ -34,6 +32,8 @@
           :output-to "target/node/twig.js"
           :output-dir "target/node"}}]}
   :profiles {
+    :ubercompile {
+      :aot :all}
     :dev {
       :source-paths ["dev-resources/src"]
       :repl-options {
@@ -41,7 +41,6 @@
       :dependencies [
            [org.clojure/tools.nrepl "0.2.13"]]}
     :test {
-      :exclusions [org.clojure/clojure]
       :dependencies [
         [org.clojure/tools.namespace "0.2.11"]]
       :plugins [
@@ -75,4 +74,11 @@
       "eastwood" "{:namespaces [:source-paths] :source-paths [\"src\"]}"]
     "lint" [
       "with-profile" "+test" "do"
-        ["check"] ["kibit"] ["outlaw"]]})
+        ["check"] ["kibit"] ["outlaw"]]
+    "build"
+      ^{:doc "Perform build steps."}
+      ["do" ["check"]
+            ["compile"]
+            ["with-profile" "+ubercompile" "compile"]
+            ["clean"]
+            ["uberjar"]]})
