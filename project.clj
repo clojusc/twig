@@ -9,9 +9,9 @@
     [clansi "1.0.0"]
     [clojusc/cljs-tools "0.2.0"]
     [com.taoensso/timbre "4.10.0"]
-    [org.clojure/clojure "1.8.0"]
-    [org.clojure/clojurescript "1.9.946"]
-    [org.clojure/tools.logging "0.4.0"]
+    [org.clojure/clojure "1.9.0"]
+    [org.clojure/clojurescript "1.10.339"]
+    [org.clojure/tools.logging "0.4.1"]
     [org.slf4j/slf4j-api "1.7.25"]]
   :plugins [
     [lein-cljsbuild "1.1.7" :exclusions [org.clojure/clojure]]
@@ -44,10 +44,10 @@
       :dependencies [
         [org.clojure/tools.namespace "0.2.11"]]
       :plugins [
-        [jonase/eastwood "0.2.4"]
-        [lein-ancient "0.6.12"]
-        [lein-bikeshed "0.4.1"]
-        [lein-kibit "0.1.5"]
+        [jonase/eastwood "0.2.6"]
+        [lein-ancient "0.6.15"]
+        [lein-bikeshed "0.5.1"]
+        [lein-kibit "0.1.6"]
         [lein-shell "0.5.0"]
         [venantius/yagni "0.1.4"]]}}
   :aliases {
