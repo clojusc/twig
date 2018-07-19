@@ -1,8 +1,9 @@
 (defproject clojusc/twig "0.3.3"
   :description "A little logging helper for Clojure projects"
   :url "https://github.com/clojusc/twig"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :license {
+    :name "Eclipse Public License"
+    :url "http://www.eclipse.org/legal/epl-v10.html"}
   :exclusions [
     [com.taoensso/encore]
     [org.clojure/clojure]]
