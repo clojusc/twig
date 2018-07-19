@@ -84,9 +84,6 @@
     "repl" ["do"
       ["clean"]
       ["repl"]]
-    "compile" ["do"
-      ["clean"]
-      ["compile"]]
     ;; Linting and tests
     "check-vers" ["with-profile" "+lint" "ancient" "check" ":all"]
     "check-jars" ["with-profile" "+lint" "do"
@@ -95,7 +92,7 @@
     "check-deps" ["do"
       ["check-jars"]
       ["check-vers"]]
-    "kibit" ["with-profile" "+lint"
+    "kibit" ["with-profile" "+lint" "do"
       ["shell" "echo" "== Kibit =="]
       ["kibit"]]
     "eastwood" ["with-profile" "+lint" "eastwood" "{:namespaces [:source-paths]}"]
