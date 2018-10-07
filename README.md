@@ -8,7 +8,7 @@
 
 [![][logo]][logo-large]
 
-*A little logging helper for Clojure projects*
+*A little logging helper for Clojure/ClojureScript projects*
 
 
 #### Table of Contents
