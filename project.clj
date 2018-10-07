@@ -41,6 +41,8 @@
     :lint {
       :source-paths ^:replace ["src"]
       :test-paths ^:replace []
+      :exclusions [
+        [org.clojure/clojure]]
       :plugins [
         [jonase/eastwood "0.3.1"]
         [lein-ancient "0.6.15"]
@@ -84,11 +86,13 @@
     "repl" ["do"
       ["clean"]
       ["repl"]]
+    "ubercompile" ["with-profile" "+ubercompile" "compile"]
     ;; Linting and tests
     "check-vers" ["with-profile" "+lint" "ancient" "check" ":all"]
     "check-jars" ["with-profile" "+lint" "do"
       ["deps" ":tree"]
-      ["deps" ":plugin-tree"]]
+      ;["deps" ":plugin-tree"]
+      ]
     "check-deps" ["do"
       ["check-jars"]
       ["check-vers"]]
@@ -102,10 +106,10 @@
       ]
     "ltest" ["with-profile" "+test" "ltest"]
     ;; Build
-    "build"
-      ^{:doc "Perform build steps."}
-      ["do" ["check"]
-            ["compile"]
-            ["with-profile" "+ubercompile" "compile"]
-            ["clean"]
-            ["uberjar"]]})
+    "build" ^{:doc "Perform build steps."} ["do"
+      ["clean"]
+      ["ubercompile"]
+      ["check-vers"]
+      ;["lint"]
+      ["ltest"]
+      ["uberjar"]]})

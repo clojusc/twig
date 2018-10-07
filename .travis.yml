@@ -1,6 +1,6 @@
 language: clojure
 script:
-  - make travis
+  - lein build
 jdk:
   - oraclejdk8
   - oraclejdk7
