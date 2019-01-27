@@ -1,4 +1,4 @@
-(defproject clojusc/twig "0.4.0"
+(defproject clojusc/twig "0.4.1"
   :description "A little logging helper for Clojure/ClojureScript projects"
   :url "https://github.com/clojusc/twig"
   :license {
@@ -10,11 +10,11 @@
   :dependencies [
     [ch.qos.logback/logback-classic "1.2.3"]
     [clansi "1.0.0"]
-    [clojusc/cljs-tools "0.2.1"]
-    [com.taoensso/encore "2.100.0"]
+    [clojusc/cljs-tools "0.2.2"]
+    [com.taoensso/encore "2.105.0"]
     [com.taoensso/timbre "4.10.0"]
-    [org.clojure/clojure "1.9.0"]
-    [org.clojure/clojurescript "1.10.339"]
+    [org.clojure/clojure "1.10.0"]
+    [org.clojure/clojurescript "1.10.439"]
     [org.clojure/tools.logging "0.4.1"]
     [org.slf4j/slf4j-api "1.7.25"]]
   :plugins [
@@ -44,11 +44,9 @@
       :exclusions [
         [org.clojure/clojure]]
       :plugins [
-        [jonase/eastwood "0.3.1"]
+        [jonase/eastwood "0.3.5"]
         [lein-ancient "0.6.15"]
-        [lein-bikeshed "0.5.1"]
-        [lein-kibit "0.1.6"]
-        [venantius/yagni "0.1.6"]]}
+        [lein-kibit "0.1.6"]]}
     :dev {
       :source-paths ["dev-resources/src"]
       :repl-options {
