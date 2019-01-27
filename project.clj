@@ -52,7 +52,6 @@
       :repl-options {
         :init-ns clojusc.twig.dev}
       :dependencies [
-        [lein-shell "0.5.0"]
         [org.clojure/tools.nrepl "0.2.13"]]}
     :test {
       :aot :all
@@ -95,7 +94,6 @@
       ["check-jars"]
       ["check-vers"]]
     "kibit" ["with-profile" "+lint" "do"
-      ["shell" "echo" "== Kibit =="]
       ["kibit"]]
     "eastwood" ["with-profile" "+lint" "eastwood" "{:namespaces [:source-paths]}"]
     "lint" ["do"
@@ -104,10 +102,14 @@
       ]
     "ltest" ["with-profile" "+test" "ltest"]
     ;; Build
+    "cljs" ["cljsbuild" "once" "twig"]
+    "cljs-node" ["cljsbuild" "once" "node"]
     "build" ^{:doc "Perform build steps."} ["do"
       ["clean"]
       ["ubercompile"]
       ["check-vers"]
-      ;["lint"]
+      ["lint"]
       ["ltest"]
-      ["uberjar"]]})
+      ["uberjar"]
+      ["cljs"]
+      ["cljs-node"]]})
