@@ -9,6 +9,8 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
+.clj-kondo/
+.lsp/
 /node_modules
 /resources/public
 *lock.json
